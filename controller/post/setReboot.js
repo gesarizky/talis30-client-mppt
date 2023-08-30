@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const setFactoryReset = async (mpptIp, params) => {
+const setReboot = async (mpptIp, params) => {
   try {
-    const url = `http://${mpptIp}/factory-reset`;
+    const url = `http://${mpptIp}/reboot`;
     const response = await axios.post(url, params);
     console.log("file: setFactoryReset.js: ~ .then ~ response:", response);
   } catch (error) {
-    console.log("error setFactoryReset.js : ", error);
+    console.log("error setReboot.js : ", error);
   }
 };
-export default setFactoryReset;
+export default setReboot;

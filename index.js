@@ -2,6 +2,11 @@ import express from "express";
 import dotenv from "dotenv";
 import MPPT from "./model/settings/mppt.js";
 import getSystemData from "./controller/get/getSystemData.js";
+import setReboot from "./controller/post/setReboot.js";
+import setFactoryReset from "./controller/post/setFactoryReset.js";
+import setAllModule from "./controller/post/setAllModule.js";
+import setSyncSystem from "./controller/post/setSyncSystem.js";
+import setUserNetwork from "./controller/post/setUserNetwork.js";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -57,15 +62,84 @@ app.delete("/mppt/:mppt_sn", async (req, res) => {
   }
 });
 
-// CONTROLLER
+// FETCHING DATA
 
 app.get("/get-system-data", async (req, res) => {
   try {
-    const response = await getSystemData();
+    const requstedIP = req.query.mppt_ip;
+    const response = await getSystemData(requstedIP);
     res.json({ status: 200, data: response });
   } catch (error) {
     throw ("error index : get/mppt :", error);
   }
 });
+
+// CONTROLLER
+app.post("/set-reboot", async (req, res) => {
+  try {
+    const requstedIP = req.query.mppt_ip;
+    const params = { "reboot": 1 };
+    await setReboot(requstedIP, params);
+    res.json({ status: 200, message: "mppt is Reboot" });
+  } catch (error) {
+    throw ("error index : post/set-reboot :", error);
+  }
+});
+
+app.post("/set-factory-reset", async (req, res) => {
+  try {
+    const requstedIP = req.query.mppt_ip;
+    const params = { "factory_reset": 1 };
+    await setFactoryReset(requstedIP, params);
+    res.json({ status: 200, message: "mppt is Factory Reset" });
+  } catch (error) {
+    throw ("error index : post/set-factory-reset :", error);
+  }
+});
+
+app.post("/set-all-module", async (req, res) => {
+  try {
+    const requstedIP = req.query.mppt_ip;
+    const params = { "disable": 1 };
+    await setAllModule(requstedIP, params);
+    res.json({ status: 200, message: "mppt is disabled" });
+  } catch (error) {
+    throw ("error index : post/set-all-module :", error);
+  }
+});
+
+app.post("/set-sync-system", async (req, res) => {
+  try {
+    const requstedIP = req.query.mppt_ip;
+    const paramvoltage = req.query.voltage;
+    const paramcurrent = req.query.total_current;
+    const params = { "voltage": paramvoltage, "total_current":paramcurrent };
+    await setSyncSystem(requstedIP, params);
+    res.json({ status: 200, message: "mppt is sync" });
+  } catch (error) {
+    throw ("error index : post/set-sync-system :", error);
+  }
+});
+
+app.post("/set-user-network", async (req, res) => {
+  try {
+    const { default_ip , ssid, pass, ip, gateway, subnet, server, mode } = req.body;
+    const params = {
+      ssid: ssid,
+      pass: pass,
+      ip: ip,
+      gateway: gateway,
+      subnet: subnet,
+      server: server,
+      mode: mode,
+    };
+    await setUserNetwork(default_ip, params);
+    res.json({ status: 200, message: "mppt user network is inserted" });
+  } catch (error) {
+    throw ("error index : post/set-user-network :", error);
+  }
+});
+
+
 
 app.listen(PORT, () => console.log(`App listening at port ${PORT}`));
