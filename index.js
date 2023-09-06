@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import MPPT from "./model/settings/mppt.js";
 import getSystemData from "./controller/get/getSystemData.js";
+import getUserNetwork from "./controller/get/getUserNetwork.js";
 import setReboot from "./controller/post/setReboot.js";
 import setFactoryReset from "./controller/post/setFactoryReset.js";
 import setAllModule from "./controller/post/setAllModule.js";
@@ -70,7 +71,17 @@ app.get("/get-system-data", async (req, res) => {
     const response = await getSystemData(requstedIP);
     res.json({ status: 200, data: response });
   } catch (error) {
-    throw ("error index : get/mppt :", error);
+    throw ("error index : get/get-system-data :", error);
+  }
+});
+
+app.get("/get-user-network", async (req, res) => {
+  try {
+    const requstedIP = req.query.mppt_ip;
+    const response = await getUserNetwork(requstedIP);
+    res.json({ status: 200, data: response });
+  } catch (error) {
+    throw ("error index : get/get-user-network :", error);
   }
 });
 
@@ -97,14 +108,25 @@ app.post("/set-factory-reset", async (req, res) => {
   }
 });
 
-app.post("/set-all-module", async (req, res) => {
+app.post("/set-all-module-on", async (req, res) => {
   try {
     const requstedIP = req.query.mppt_ip;
-    const params = { "disable": 1 };
+    const params = { "disable": 0 };
     await setAllModule(requstedIP, params);
-    res.json({ status: 200, message: "mppt is disabled" });
+    res.json({ status: 200, message: "mppt is on" });
   } catch (error) {
     throw ("error index : post/set-all-module :", error);
+  }
+});
+
+app.post("/set-all-module-off", async (req, res) => {
+  try {
+    const requstedIP = req.query.mppt_ip;
+    const params = { disable: 1 };
+    await setAllModule(requstedIP, params);
+    res.json({ status: 200, message: "mppt is off" });
+  } catch (error) {
+    throw ("error index : post/set-all-module :", error);``
   }
 });
 

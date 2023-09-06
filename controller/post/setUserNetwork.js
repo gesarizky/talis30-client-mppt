@@ -4,7 +4,7 @@ const setUserNetwork = async (mpptIp, params) => {
   try {
     const url = `http://${mpptIp}/set-network`;
     const response = await axios.post(url, params);
-    console.log("file: setUserNetwork.js: ~ .then ~ response:", response);
+    console.log("file: setUserNetwork.js: ~ .then ~ response:", response.status);
   } catch (error) {
     console.log("error setUserNetwork.js : ", error);
   }

@@ -28,12 +28,10 @@ import getMPPT from "./getMPPT.js";
 
 const getSystemData = async (mpptIp) => {
   try {
-      const resultData = [];
-        //   const url = `http://${mpptIp}/get-data`;
-        const url = `http://${mpptIp}`;
+          const url = `http://${mpptIp}/get-data`;
+        // const url = `http://${mpptIp}`;
         const data = await getMPPT(url);
-        resultData.push(data);
-      return resultData;
+      return data;
   } catch (error) {
     throw ("error getSystemData :", error);
   }
