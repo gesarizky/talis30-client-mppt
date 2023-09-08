@@ -2,13 +2,16 @@ import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 dotenv.config();
 
+
 const DATABASE_SETTINGS = process.env.DATABASE_SETTINGS;
 const DATABASE_USERNAME_SETTINGS = process.env.DATABASE_USERNAME_SETTINGS;
 const DATABASE_PASSWORD_SETTINGS = process.env.DATABASE_PASSWORD_SETTINGS;
 const DATABASE_HOST_SETTINGS = process.env.DATABASE_HOST_SETTINGS;
 const DATABASE_TYPE_SETTINGS = process.env.DATABASE_TYPE_SETTINGS;
 const DATABASE_LOGGING_SETTINGS = process.env.DATABSE_LOGGING_SETTINGS;
-
+/**
+ * @description inisiasi config database untuk setting db
+ */
 const DBSETTINGS = new Sequelize(
   DATABASE_SETTINGS,
   DATABASE_USERNAME_SETTINGS,

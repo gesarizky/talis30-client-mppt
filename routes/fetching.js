@@ -1,6 +1,10 @@
 import getSystemData from "../controller/get/getSystemData.js";
 import getUserNetwork from "../controller/get/getUserNetwork.js";
 
+/**
+ * @description routing fetching
+ */
+
 const dataFetching = async (app) => {
   // FETCHING DATA
 
@@ -10,7 +14,10 @@ const dataFetching = async (app) => {
       const response = await getSystemData(requstedIP);
       res.json({ status: 200, data: response });
     } catch (error) {
-      throw ("error index : get/get-system-data :", error);
+      res.status(400).json({
+        code: 400,
+        message: error.message,
+      });
     }
   });
 
@@ -20,7 +27,10 @@ const dataFetching = async (app) => {
       const response = await getUserNetwork(requstedIP);
       res.json({ status: 200, data: response });
     } catch (error) {
-      throw ("error index : get/get-user-network :", error);
+     res.status(400).json({
+       code: 400,
+       message: error.message,
+     });
     }
   });
 };

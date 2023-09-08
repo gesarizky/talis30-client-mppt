@@ -1,6 +1,10 @@
 import { DataTypes } from "sequelize";
 import DBSETTINGS from "../../config/setting/database.js";
 
+/**
+ * @description modeling database mppt
+ */
+
 const MPPT = DBSETTINGS.define("mppt", {
   mppt_sn: {
     type: DataTypes.STRING,

@@ -4,6 +4,9 @@ import setAllModule from "../controller/post/setAllModule.js";
 import setSyncSystem from "../controller/post/setSyncSystem.js";
 import setUserNetwork from "../controller/post/setUserNetwork.js";
 
+/**
+ * @description routing controllig
+ */
 const setControlling = async (app) => {
   // CONTROLLER
   app.post("/set-reboot", async (req, res) => {
@@ -13,7 +16,10 @@ const setControlling = async (app) => {
       await setReboot(requstedIP, params);
       res.json({ status: 200, message: "mppt is Reboot" });
     } catch (error) {
-      throw ("error index : post/set-reboot :", error);
+      res.status(400).json({
+        code: 400,
+        message: error.message,
+      });
     }
   });
 
@@ -24,7 +30,10 @@ const setControlling = async (app) => {
       await setFactoryReset(requstedIP, params);
       res.json({ status: 200, message: "mppt is Factory Reset" });
     } catch (error) {
-      throw ("error index : post/set-factory-reset :", error);
+      res.status(400).json({
+        code: 400,
+        message: error.message,
+      });
     }
   });
 
@@ -35,7 +44,10 @@ const setControlling = async (app) => {
       await setAllModule(requstedIP, params);
       res.json({ status: 200, message: "mppt is on" });
     } catch (error) {
-      throw ("error index : post/set-all-module :", error);
+       res.status(400).json({
+         code: 400,
+         message: error.message,
+       });
     }
   });
 
@@ -46,8 +58,10 @@ const setControlling = async (app) => {
       await setAllModule(requstedIP, params);
       res.json({ status: 200, message: "mppt is off" });
     } catch (error) {
-      throw ("error index : post/set-all-module :", error);
-      ``;
+      res.status(400).json({
+        code: 400,
+        message: error.message,
+      });
     }
   });
 
@@ -60,7 +74,10 @@ const setControlling = async (app) => {
       await setSyncSystem(requstedIP, params);
       res.json({ status: 200, message: "mppt is sync" });
     } catch (error) {
-      throw ("error index : post/set-sync-system :", error);
+      res.status(400).json({
+        code: 400,
+        message: error.message,
+      });
     }
   });
 
@@ -80,7 +97,10 @@ const setControlling = async (app) => {
       await setUserNetwork(default_ip, params);
       res.json({ status: 200, message: "mppt user network is inserted" });
     } catch (error) {
-      throw ("error index : post/set-user-network :", error);
+      res.status(400).json({
+        code: 400,
+        message: error.message,
+      });
     }
   });
 };

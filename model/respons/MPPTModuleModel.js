@@ -1,3 +1,6 @@
+/**
+ * @description  modeling data constructor untuk module
+ */
 class MPPTModuleModel {
   constructor(data) {
     this.counter = data.counter;

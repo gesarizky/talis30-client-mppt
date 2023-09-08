@@ -1,4 +1,7 @@
 import MPPTModuleModel from "./MPPTModuleModel.js";
+/**
+ * @description  modeling data constructor untuk group 
+ */
 class MPPTGroupModel {
   constructor(data) {
     this.counter = data.counter;

@@ -17,7 +17,10 @@ app.post("/mppt", async (req, res) => {
     await MPPT.upsert(req.body);
     res.json({ status: 200, message: "mppt is inserted" });
   } catch (error) {
-    throw ("error index : post/mppt :", error);
+    res.status(400).json({
+      code: 400,
+      message: error.message,
+    });
   }
 });
 
@@ -26,7 +29,10 @@ app.get("/mppt", async (req, res) => {
     const response = await MPPT.findAll();
     res.json({ status: 200, data: response });
   } catch (error) {
-    throw ("error index : get/mppt :", error);
+    res.status(400).json({
+      code: 400,
+      message: error.message,
+    });
   }
 });
 
@@ -38,7 +44,10 @@ app.get("/mppt/:mppt_sn", async (req, res) => {
     });
     res.json({ status: 200, data: response });
   } catch (error) {
-    throw ("error index : get/mppt/:mppt_sn :", error);
+    res.status(400).json({
+      code: 400,
+      message: error.message,
+    });
   }
 });
 
@@ -51,7 +60,10 @@ app.delete("/mppt/:mppt_sn", async (req, res) => {
       message: `Data MPPT ${requestedDevice} is deleted`,
     });
   } catch (error) {
-    throw ("error index : get/mppt/:mppt_sn :", error);
+    res.status(400).json({
+      code: 400,
+      message: error.message,
+    });
   }
 });
 
