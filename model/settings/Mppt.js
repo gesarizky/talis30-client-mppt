@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import DBSETTINGS from "../../config/setting/database.js";
 
 /**
- * @description modeling database mppt
+ * @description modeling tabel mppt di setting db
  */
 
 const MPPT = DBSETTINGS.define("mppt", {

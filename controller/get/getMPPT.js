@@ -1,7 +1,7 @@
 import axios from "axios";
 import MPPTBaseModel from "../../model/respons/MPPTBaseModel.js";
 /**
- * @description fungsi untuk mengambil data mppt dan maping data
+ * @description mengambil data mppt dan destructuring
  * @param {*} url nilai ip yang akan di fetching  
  * @returns mengembalikan nilai maping data
  */

@@ -5,7 +5,7 @@ import setSyncSystem from "../controller/post/setSyncSystem.js";
 import setUserNetwork from "../controller/post/setUserNetwork.js";
 
 /**
- * @description routing controllig
+ * @description routing controlling
  */
 const setControlling = async (app) => {
   // CONTROLLER
